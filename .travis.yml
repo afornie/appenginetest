@@ -18,7 +18,7 @@ script:
     - ls -ltra appengine-modules-ear/build/exploded-app
     - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
     - unzip -q appengine-java-sdk-1.9.23.zip
-    - appengine-java-sdk-1.9.23/bin/appcfg.sh --email=antonio@splendo.com --passin update appengine-modules-ear/build/exploded-app << mypassword
+    - appengine-java-sdk-1.9.23/bin/appcfg.sh --email=antonio@splendo.com --passin update appengine-modules-ear/build/exploded-app << 'mypassword'
     # - appengine-java-sdk-1.9.23/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/exploded-app
 
 
