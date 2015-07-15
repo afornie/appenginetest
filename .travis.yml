@@ -19,7 +19,7 @@ script:
     - ls -ltra appengine-java-sdk-1.9.23.zip/bin/
     - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
     - unzip -q appengine-java-sdk-1.9.23.zip
-    - appengine-java-sdk-1.9.23.zip/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/libs/appengine-modules-ear-1.0.ear
+    - appengine-java-sdk-1.9.23/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/libs/appengine-modules-ear-1.0.ear
 
 
 after_success:
