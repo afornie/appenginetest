@@ -10,11 +10,13 @@ install:
 script:
     - echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
     - cat ~/.appcfg_oauth2_tokens_java
+    - ./gradlew appengine-modules-ear:ear
     - ls -ltra ~
     - ls -ltra .
+    - ls -ltra appengine-modules-ear
+    - ls -ltra appengine-modules-ear/build
     - ls -ltra appengine-modules-ear/build/exploded-app
     - ls -ltra appengine-java-sdk-1.9.23.zip/bin/
-    #- ./gradlew appengine-modules-ear:appengineUpdate
     - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
     - unzip -q appengine-java-sdk-1.9.23.zip
     - appengine-java-sdk-1.9.23.zip/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/exploded-app
