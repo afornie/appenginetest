@@ -10,10 +10,13 @@ install:
 script:
     - echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
     - cat ~/.appcfg_oauth2_tokens_java
+    - ls -ltra ~
+    - ls -ltra .
+    - ls -ltra target
     #- ./gradlew appengine-modules-ear:appengineUpdate
-    - wget https://commondatastorage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.2.zip -nv
+    - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
     - unzip -q appengine-java-sdk-1.9.2.zip
-    - appengine-java-sdk-1.9.2/bin/appcfg.sh --oauth2 update target/khata-service-war-1.0.0-SNAPSHOT
+    - appengine-java-sdk-1.9.2/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/exploded-app
 
 
 after_success:
