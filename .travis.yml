@@ -7,6 +7,8 @@ install:
     fi;
   - google-cloud-sdk/bin/gcloud components update preview app --quiet
 
+script:
+    - ./gradlew appengine-modules-ear:ear
 
 
 after_success:
