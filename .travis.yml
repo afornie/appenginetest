@@ -8,7 +8,9 @@ install:
   - google-cloud-sdk/bin/gcloud components update preview app --quiet
 
 script:
-    - echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
+    #- echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
+    #- echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
+    - mv .appcfg_oauth2_tokens_java ~/
     - cat ~/.appcfg_oauth2_tokens_java
     - ./gradlew appengine-modules-ear:appengineExplodeApp
     - ls -ltra ~
