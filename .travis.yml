@@ -1,5 +1,6 @@
 install:
-  - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in test-snapshots-e38d22282e53.json.enc -out test-snapshots-e38d22282e53.json -d
+  #- openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in test-snapshots-e38d22282e53.json.enc -out test-snapshots-e38d22282e53.json -d
+  - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in .appcfg_oauth2_tokens_java.enc -out .appcfg_oauth2_tokens_java -d
   - if [[ ! -f google-cloud-sdk/path.bash.inc ]]; then
       echo "Downloading google cloud sdk";
       wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip;
