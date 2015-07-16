@@ -13,7 +13,7 @@ script:
   - cat json_key_file
   - ./gradlew appengine-modules-ear:appengineExplodeApp
   - ls -ltra .
-  - gcloud auth activate-service-account --key-file json_key_file
+  - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file json_key_file
 
 
 after_success:
