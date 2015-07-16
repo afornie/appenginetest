@@ -8,20 +8,12 @@ install:
   - google-cloud-sdk/bin/gcloud components update preview app --quiet
 
 script:
-    #- echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
-    #- echo \{\"credentials\":\{\"anto\":\{\"access_token\":\"$access_token\",\"expiration_time_millis\":$expiration_time_millis,\"refresh_token\":\"$refresh_token\"\}\}\} | tee ~/.appcfg_oauth2_tokens_java
-    - cat .appcfg_oauth2_tokens_java > ~/.appcfg_oauth2_tokens_java
-    - cat ~/.appcfg_oauth2_tokens_java
-    - ./gradlew appengine-modules-ear:appengineExplodeApp
-    - ls -ltra ~
-    - ls -ltra .
-    - ls -ltra appengine-modules-ear
-    - ls -ltra appengine-modules-ear/build
-    - ls -ltra appengine-modules-ear/build/exploded-app
-    - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
-    - unzip -q appengine-java-sdk-1.9.23.zip
-    # - appengine-java-sdk-1.9.23/bin/appcfg.sh --email=antonio@splendo.com --passin update appengine-modules-ear/build/exploded-app << 'mypassword'
-    - appengine-java-sdk-1.9.23/bin/appcfg.sh --oauth2 update appengine-modules-ear/build/exploded-app
+  - echo $json_key  > json_key_file
+  - ls -ltra .
+  - cat json_key_file
+  - ./gradlew appengine-modules-ear:appengineExplodeApp
+  - ls -ltra .
+  - gcloud auth activate-service-account --key-file json_key_file
 
 
 after_success:
