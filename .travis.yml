@@ -1,4 +1,5 @@
 install:
+  - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in test-snapshots-e38d22282e53.json.enc -out test-snapshots-e38d22282e53.json -d
   - if [[ ! -f google-cloud-sdk/path.bash.inc ]]; then
       echo "Downloading google cloud sdk";
       wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip;
@@ -8,12 +9,10 @@ install:
   - google-cloud-sdk/bin/gcloud components update preview app --quiet
 
 script:
-  - echo $json_key  > json_key_file
   - ls -ltra .
-  - cat json_key_file
   - ./gradlew appengine-modules-ear:appengineExplodeApp
   - ls -ltra .
-  - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file json_key_file
+  - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file test-snapshots-e38d22282e53.json
 
 
 after_success:
