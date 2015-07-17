@@ -2,6 +2,7 @@ install:
   - ls .
 
 script:
+  - ./gradlew appengine-modules-ear:appengineExplodeApp
   - ls -lart
 
 after_success:
