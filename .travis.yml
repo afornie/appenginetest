@@ -1,6 +1,9 @@
 install:
   - ls .
-
+  - cat build_number=${TRAVIS_BUILD_NUMBER} >> local.properties
+  - source version.txt
+  - cat tacx_version=${tacx_version} >> local.properties
+  - cat local.properties
 script:
   - ./gradlew appengine-modules-ear:appengineExplodeApp
   - ls -lart
