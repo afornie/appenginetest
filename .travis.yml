@@ -9,6 +9,4 @@ script:
 
 
 deploy:
-  - if [ "${TRAVIS_BRANCH}" == "rc" ]; then
-      appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
-    fi;
+  - ls .
