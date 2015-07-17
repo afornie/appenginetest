@@ -6,7 +6,4 @@ install:
 
 script:
   - ./gradlew appengine-modules-ear:appengineExplodeApp
-
-
-deploy:
   - ls .
