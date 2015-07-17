@@ -1,29 +1,21 @@
 install:
-  - whoami
-  #- openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in test-snapshots-e38d22282e53.json.enc -out test-snapshots-e38d22282e53.json -d
-  - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in .appcfg_oauth2_tokens_java.enc -out .appcfg_oauth2_tokens_java -d
-  - if [[ ! -f google-cloud-sdk/path.bash.inc ]]; then
-      echo "Downloading google cloud sdk";
-      wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip;
-      unzip -qq google-cloud-sdk.zip;
-      google-cloud-sdk/install.sh --usage-reporting false --path-update false --rc-path=~/.bashrc --bash-completion false --override-components=app;
-    fi;
-  - google-cloud-sdk/bin/gcloud components update preview app --quiet
-  - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
-  - unzip -q appengine-java-sdk-1.9.23.zip
-  - cp .appcfg_oauth2_tokens_java ~
-  - ls -ltra ~
-  - cat ~/.appcfg_oauth2_tokens_java
+  - echo "In install phase"
 
 script:
-  - ls -ltra .
+  - echo "In script phase"
   - ./gradlew appengine-modules-ear:appengineExplodeApp
-  - ls -ltra .
-  # - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file test-snapshots-e38d22282e53.json
-  # - google-cloud-sdk/bin/gcloud --project "test-snapshots" preview app deploy --version "1.0" --quiet "app.yaml"
-  - appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
 
 
-after_success:
-    # Just if needed
-    #- ./travis-ci-deploy.sh
+before_deploy:
+  - echo "In before_deploy phase"
+  - wget https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.23.zip
+  - unzip -q appengine-java-sdk-1.9.23.zip
+  - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in .appcfg_oauth2_tokens_java.enc -out ~/.appcfg_oauth2_tokens_java -d
+  #- cp .appcfg_oauth2_tokens_java ~
+
+branches:
+  only:
+    - rc
+    - /^(?i:deploy)-.*$/
+      deploy:
+        - appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
