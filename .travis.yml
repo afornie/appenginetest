@@ -7,8 +7,5 @@ install:
 script:
   - ./gradlew appengine-modules-ear:appengineExplodeApp
 
-
 after_success:
-  - if [ "${TRAVIS_BRANCH}" == "rc" ] -a [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
-      appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
-    fi;
+  - .travis/deploy.sh
