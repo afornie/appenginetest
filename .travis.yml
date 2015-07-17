@@ -16,4 +16,4 @@ before_deploy:
 deploy:
   - if [ "${TRAVIS_BRANCH}" == "rc" ] -a [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
     appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
-  fi
+  - fi
