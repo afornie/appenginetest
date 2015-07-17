@@ -13,9 +13,7 @@ before_deploy:
   - openssl aes-256-cbc -K $encrypted_a6c05f649a4b_key -iv $encrypted_a6c05f649a4b_iv -in .appcfg_oauth2_tokens_java.enc -out ~/.appcfg_oauth2_tokens_java -d
   #- cp .appcfg_oauth2_tokens_java ~
 
-branches:
-  only:
-    - rc
-    - /^(?i:deploy)-.*$/
-  deploy:
-    - appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
+deploy:
+  - if [ "${TRAVIS_BRANCH}" == "rc" ] -a [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+    appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
+  fi
