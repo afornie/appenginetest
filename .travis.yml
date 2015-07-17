@@ -1,3 +1,9 @@
+install:
+  - ls .
+
+script:
+  - ls -lart
+
 after_success:
   - if [ "${TRAVIS_BRANCH}" == "rc" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ];
   - then .travis/prepare_deploy.sh;
