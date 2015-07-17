@@ -17,5 +17,5 @@ branches:
   only:
     - rc
     - /^(?i:deploy)-.*$/
-      deploy:
-        - appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
+  deploy:
+    - appengine-java-sdk-1.9.23/bin/appcfg.sh update appengine-modules-ear/build/exploded-app
